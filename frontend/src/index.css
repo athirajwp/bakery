@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream text-brown font-body antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #ffd700;
+    color: #3e2723;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading;
+  }
+
+  :focus-visible {
+    outline: 3px solid #ffd700;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-gold {
+    @apply btn bg-gold-gradient text-brown shadow-gold hover:-translate-y-0.5 hover:shadow-xl;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary/25 bg-white/80 text-primary hover:border-primary hover:bg-primary hover:text-white;
+  }
+
+  .btn-ghost-light {
+    @apply btn border-2 border-white/60 text-white hover:bg-white hover:text-primary;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-primary/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fbeede;
+}
+::-webkit-scrollbar-thumb {
+  background: #8b0000;
+  border-radius: 9999px;
+  border: 2px solid #fbeede;
+}
+
+/* Swiper tweaks */
+.swiper-pagination-bullet {
+  background: #8b0000 !important;
+  opacity: 0.3;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #8b0000 !important;
+}
+
+/* Masonry gallery */
+.masonry {
+  columns: 2;
+  column-gap: 1rem;
+}
+@media (min-width: 640px) {
+  .masonry {
+    columns: 3;
+  }
+}
+@media (min-width: 1024px) {
+  .masonry {
+    columns: 4;
+  }
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}

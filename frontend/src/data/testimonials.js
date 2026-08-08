@@ -1,0 +1,58 @@
+export const testimonials = [
+  {
+    id: 1,
+    name: 'Priya Ramesh',
+    place: 'Lakshmangudi',
+    rating: 5,
+    text: 'Ordered a chocolate cake for my son’s birthday. It was so fresh and the chocolate was rich. Everyone at the party loved it!',
+  },
+  {
+    id: 2,
+    name: 'Karthik Subramanian',
+    place: 'Koothanallur',
+    rating: 5,
+    text: 'Their Mysore pak is the best in town — melts in your mouth. We now order from Kavitha Sweets for every festival.',
+  },
+  {
+    id: 3,
+    name: 'Sundari Devi',
+    place: 'Koothanallur',
+    rating: 4,
+    text: 'Beautiful wedding cake and delivered on time. The design was exactly what we asked for. Very happy with the service.',
+  },
+  {
+    id: 4,
+    name: 'Arun Prakash',
+    place: 'Lakshmangudi',
+    rating: 5,
+    text: 'Fresh murukku and mixture, perfect crunch. Great taste and very hygienic. Reasonable prices too.',
+  },
+  {
+    id: 5,
+    name: 'Meena Lakshmi',
+    place: 'Koothanallur',
+    rating: 4,
+    text: 'Ordered laddu for Deepavali. Soft, fresh and perfectly sweet. Delivery to our door was quick and safe.',
+  },
+  {
+    id: 6,
+    name: 'Raghavan V.',
+    place: 'Needamangalam',
+    rating: 5,
+    text: 'Custom photo cake for my daughter’s birthday turned out amazing. The team is very cooperative and friendly.',
+  },
+  {
+    id: 7,
+    name: 'Latha Mani',
+    place: 'Koothanallur',
+    rating: 5,
+    text: 'Butter cookies and fruit cake are simply delicious. My whole family orders from here regularly.',
+  },
+  {
+    id: 8,
+    name: 'Suresh Kumar',
+    place: 'Lakshmangudi',
+    rating: 4,
+    text: 'Good quality sweets and snacks. Janjira is fresh and juicy. Ordering on WhatsApp is very convenient.',
+  },
+]
