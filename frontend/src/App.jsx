@@ -7,6 +7,7 @@ import ScrollManager from '@/components/ScrollManager'
 import Home from '@/pages/Home'
 import Menu from '@/pages/Menu'
 import AboutPage from '@/pages/AboutPage'
+import GalleryPage from '@/pages/GalleryPage'
 import ContactPage from '@/pages/ContactPage'
 import NotFound from '@/pages/NotFound'
 
@@ -14,6 +15,7 @@ const TITLES = {
   '/': 'Kavitha Sweets & Bakery | Fresh Cakes & Traditional Sweets in Lakshmangudi',
   '/menu': 'Menu | Kavitha Sweets & Bakery — Cakes, Sweets & Snacks',
   '/about': 'About Us | Kavitha Sweets & Bakery',
+  '/gallery': 'Gallery | Kavitha Sweets & Bakery',
   '/contact': 'Contact | Kavitha Sweets & Bakery',
 }
 
@@ -39,6 +41,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

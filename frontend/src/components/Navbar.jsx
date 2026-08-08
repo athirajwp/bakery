@@ -6,9 +6,9 @@ import { site, waLink } from '@/data/site'
 
 const NAV = [
   { label: 'Home', to: '/' },
-  { label: 'About', to: '/#about' },
+  { label: 'About', to: '/about' },
   { label: 'Menu', to: '/menu' },
-  { label: 'Gallery', to: '/#gallery' },
+  { label: 'Gallery', to: '/gallery' },
   { label: 'Contact', to: '/contact' },
 ]
 
@@ -19,7 +19,6 @@ function isHashTarget(to) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('')
   const location = useLocation()
 
   useEffect(() => {
@@ -32,24 +31,6 @@ export default function Navbar() {
   useEffect(() => {
     setOpen(false)
   }, [location.pathname, location.hash])
-
-  useEffect(() => {
-    if (location.pathname !== '/') return
-    const ids = ['about', 'gallery']
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActiveSection(e.target.id)
-        })
-      },
-      { rootMargin: '-40% 0px -50% 0px' }
-    )
-    ids.forEach((id) => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-    return () => observer.disconnect()
-  }, [location.pathname])
 
   const solid = scrolled || open || location.pathname !== '/'
 
