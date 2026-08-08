@@ -14,7 +14,7 @@ class AdminUserSeeder extends Seeder
             ['email' => 'admin@kavithasweets.in'],
             [
                 'name' => 'Kavitha Sweets Admin',
-                'phone' => '919965155006',
+                'phone' => '918903749300',
                 'password' => Hash::make('kavitha@2024'),
                 'role' => 'admin',
                 'is_active' => true,

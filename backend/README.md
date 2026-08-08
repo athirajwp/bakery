@@ -1,6 +1,6 @@
 # Kavitha Sweets & Bakery — Laravel 12 REST API + Admin Panel
 
-Backend for **Kavitha Sweets & Bakery** (`கவிதா இனிப்புகள் மற்றும் அடுமனை`), Lakshmangudi, Tamil Nadu.
+Backend for **Kavitha Sweets & Bakery** (`கவிதா இனிப்புகள் மற்றும் அடுமனை`), Kuthalam, Tamil Nadu.
 
 - **Stack:** Laravel 12 · MySQL · Laravel Sanctum (token auth)
 - **Deliverables:** REST API for the React frontend + a full server-rendered admin panel (Blade + Tailwind CDN)
@@ -124,8 +124,8 @@ All prefixed with `/api/admin`, guarded by the `admin` middleware. Handles produ
 {
   "customer_name": "Priya Ramesh",
   "phone": "9876543210",
-  "address": "45 Hospital Road, Lakshmangudi",
-  "city": "Koothanallur",
+  "address": "9 Park Road, Kuthalam",
+  "city": "Mayiladuthurai",
   "items": [
     { "product_id": 1, "name": "Chocolate Cake", "quantity": 1, "price": 450 }
   ]

@@ -129,7 +129,7 @@ export default function Footer() {
             © {new Date().getFullYear()} {site.name} · {site.tamilName}. All rights reserved.
           </p>
           <p className="inline-flex items-center gap-1.5">
-            Made with <span className="text-primary">♥</span> in Lakshmangudi
+            Made with <span className="text-primary">♥</span> in Kuthalam
           </p>
         </div>
       </div>

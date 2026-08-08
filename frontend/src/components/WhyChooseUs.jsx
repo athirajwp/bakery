@@ -16,7 +16,7 @@ const REASONS = [
   { icon: Sun, title: 'Fresh Every Day', desc: 'Everything is baked and prepared fresh every single morning.' },
   { icon: Wheat, title: 'Premium Ingredients', desc: 'Pure ghee, farm-fresh milk and the finest cocoa and flours.' },
   { icon: ChefHat, title: 'Experienced Bakers', desc: 'Master bakers and sweet makers with decades of expertise.' },
-  { icon: Truck, title: 'Fast Delivery', desc: 'Quick and careful delivery across Lakshmangudi and nearby areas.' },
+  { icon: Truck, title: 'Fast Delivery', desc: 'Quick and careful delivery across Kuthalam and nearby areas.' },
   { icon: Wallet, title: 'Affordable Price', desc: 'Premium taste at honest, family-friendly prices.' },
   { icon: ShieldCheck, title: 'Hygienic Kitchen', desc: 'Spotless, certified-hygienic kitchen and safe packaging.' },
   { icon: Sparkles, title: 'Custom Orders', desc: 'Theme cakes, photo cakes and bulk sweet orders on request.' },

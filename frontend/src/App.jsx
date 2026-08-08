@@ -12,7 +12,7 @@ import ContactPage from '@/pages/ContactPage'
 import NotFound from '@/pages/NotFound'
 
 const TITLES = {
-  '/': 'Kavitha Sweets & Bakery | Fresh Cakes & Traditional Sweets in Lakshmangudi',
+  '/': 'Kavitha Sweets & Bakery | Fresh Cakes & Traditional Sweets in Kuthalam',
   '/menu': 'Menu | Kavitha Sweets & Bakery — Cakes, Sweets & Snacks',
   '/about': 'About Us | Kavitha Sweets & Bakery',
   '/gallery': 'Gallery | Kavitha Sweets & Bakery',

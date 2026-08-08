@@ -1,7 +1,7 @@
 # Kavitha Sweets & Bakery
 ### கவிதா இனிப்புகள் மற்றும் அடுமனை
 
-Premium, production-ready website for **Kavitha Sweets & Bakery** — 45, 46 Hospital Road, Lakshmangudi, Koothanallur, Tamil Nadu 614102. · 4.1★ (394 Google reviews) · +91 99651 55006
+Premium, production-ready website for **Kavitha Sweets & Bakery** — 9 Park Road, Kuthalam, Mayiladuthurai, Tamil Nadu. · 4.1★ (394 Google reviews) · +91 89037 49300
 
 ```
 bakery/

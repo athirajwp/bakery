@@ -79,7 +79,7 @@ export default function About() {
             </h2>
             <p className="mt-5 text-sm leading-relaxed text-brown-muted sm:text-base">
               Kavitha Sweets &amp; Bakery brings the finest cakes, traditional Tamil sweets and bakery
-              treats to Lakshmangudi, Koothanallur. Every recipe is crafted with fresh ingredients and
+              treats to Kuthalam, Mayiladuthurai. Every recipe is crafted with fresh ingredients and
               time-honoured methods — from rich birthday cakes and elegant wedding cakes to classic
               mysore pak and jangiri that taste just like home.
             </p>

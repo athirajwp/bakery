@@ -1,18 +1,18 @@
-const ADDRESS = '45, 46 Hospital Road, Lakshmangudi, Koothanallur, Tamil Nadu 614102'
+const ADDRESS = '9 Park Road, Kuthalam, Mayiladuthurai, Tamil Nadu'
 
 export const site = {
   name: 'Kavitha Sweets & Bakery',
   tamilName: 'கவிதா இனிப்புகள் மற்றும் அடுமனை',
   tagline: 'Serving Happiness Since Years',
   type: 'Bakery · Cake Shop · Sweets & Snacks',
-  phone: '+91 99651 55006',
-  phoneTel: '+919965155006',
-  whatsapp: '919965155006',
+  phone: '+91 89037 49300',
+  phoneTel: '+918903749300',
+  whatsapp: '918903749300',
   email: 'kavithasweetsbakery@gmail.com',
   rating: 4.1,
   reviewCount: 394,
   address: ADDRESS,
-  addressLines: ['45, 46 Hospital Road', 'Lakshmangudi, Koothanallur', 'Tamil Nadu – 614102'],
+  addressLines: ['9 Park Road', 'Kuthalam, Mayiladuthurai', 'Tamil Nadu'],
   hours: [
     { days: 'Monday – Sunday', time: '9:00 AM – 10:00 PM' },
     { days: 'Special Festive Hours', time: 'Open till late' },

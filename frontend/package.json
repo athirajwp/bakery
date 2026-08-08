@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Premium website for Kavitha Sweets & Bakery, Lakshmangudi",
+  "description": "Premium website for Kavitha Sweets & Bakery, Kuthalam",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
