@@ -4,6 +4,9 @@ const API_URL =
     ? '/api'
     : 'http://localhost:8000/api')
 
+import { products as seedProducts } from '../data/products'
+import { categories as seedCategories } from '../data/categories'
+
 function getLocalOrders() {
   try {
     return JSON.parse(localStorage.getItem('ksb_local_orders')) || []
@@ -17,6 +20,24 @@ function saveLocalOrders(orders) {
     localStorage.setItem('ksb_local_orders', JSON.stringify(orders))
   } catch {
     // ignore
+  }
+}
+
+function getLocalProducts() {
+  try {
+    const items = JSON.parse(localStorage.getItem('ksb_local_products'))
+    return Array.isArray(items) && items.length > 0 ? items : seedProducts
+  } catch {
+    return seedProducts
+  }
+}
+
+function getLocalCategories() {
+  try {
+    const items = JSON.parse(localStorage.getItem('ksb_local_categories'))
+    return Array.isArray(items) && items.length > 0 ? items : seedCategories
+  } catch {
+    return seedCategories
   }
 }
 
@@ -48,7 +69,7 @@ export async function apiFetch(path, { method = 'GET', body, token, formData } =
 
     return data
   } catch (fetchErr) {
-    // Handle fallback when API server is unreachable or returns status 500
+    // Fallback when API server is unreachable or returns status 500
     if (path === '/orders' && method === 'POST' && body) {
       const orderNum = 'KS-' + Math.random().toString(36).substring(2, 10).toUpperCase()
       const items = (body.items || []).map((i) => ({
@@ -81,6 +102,21 @@ export async function apiFetch(path, { method = 'GET', body, token, formData } =
       return { order: newOrder }
     }
 
+    // Dashboard fallback
+    if (path.startsWith('/admin/dashboard') || path === '/admin/stats') {
+      const localOrders = getLocalOrders()
+      const localProds = getLocalProducts()
+      return {
+        total_orders: localOrders.length,
+        pending_orders: localOrders.filter((o) => o.status === 'pending').length,
+        total_revenue: localOrders.reduce((sum, o) => sum + (o.total || 0), 0),
+        total_products: localProds.length,
+        recent_orders: localOrders.slice(0, 5),
+        top_products: localProds.slice(0, 4),
+      }
+    }
+
+    // Orders fallback
     if (path.startsWith('/admin/orders')) {
       const localOrders = getLocalOrders()
       if (path.includes('/admin/orders/')) {
@@ -94,6 +130,33 @@ export async function apiFetch(path, { method = 'GET', body, token, formData } =
         last_page: 1,
         total: localOrders.length,
       }
+    }
+
+    // Products fallback
+    if (path.startsWith('/admin/products')) {
+      const localProds = getLocalProducts()
+      return {
+        data: localProds,
+        current_page: 1,
+        last_page: 1,
+        total: localProds.length,
+      }
+    }
+
+    // Categories fallback
+    if (path.startsWith('/admin/categories')) {
+      const localCats = getLocalCategories()
+      return {
+        data: localCats,
+        current_page: 1,
+        last_page: 1,
+        total: localCats.length,
+      }
+    }
+
+    // Generic admin fallback
+    if (path.startsWith('/admin/')) {
+      return { data: [], current_page: 1, last_page: 1, total: 0 }
     }
 
     throw fetchErr
