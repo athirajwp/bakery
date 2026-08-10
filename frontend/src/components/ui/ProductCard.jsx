@@ -1,9 +1,10 @@
-import { MessageCircle } from 'lucide-react'
-import { orderLink } from '@/data/site'
+import { ShoppingCart } from 'lucide-react'
+import { useCart } from '@/context/CartContext'
 import Img from './Img'
 import StarRating from './StarRating'
 
 export default function ProductCard({ product }) {
+  const { addToCart } = useCart()
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
       <div className="relative overflow-hidden">
@@ -38,15 +39,13 @@ export default function ProductCard({ product }) {
             ₹{product.price}
             <span className="ml-1 align-middle text-[11px] font-medium text-brown-muted">/ {product.weight}</span>
           </p>
-          <a
-            href={orderLink(product)}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            onClick={() => addToCart(product)}
             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-cream transition-all duration-300 hover:bg-gold-gradient hover:text-brown hover:shadow-gold"
-            aria-label={`Order ${product.name} on WhatsApp`}
+            aria-label={`Add ${product.name} to cart`}
           >
-            <MessageCircle size={14} /> Order
-          </a>
+            <ShoppingCart size={14} /> Add to Cart
+          </button>
         </div>
       </div>
     </article>

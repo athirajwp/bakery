@@ -24,6 +24,7 @@ class OrderResource extends JsonResource
             'payment_method' => $this->payment_method,
             'notes' => $this->notes,
             'items' => $this->whenLoaded('items'),
+            'items_count' => $this->whenCounted('items'),
             'created_at' => $this->created_at?->toIso8601String(),
         ];
     }

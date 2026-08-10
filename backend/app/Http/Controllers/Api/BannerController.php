@@ -19,6 +19,11 @@ class BannerController extends Controller
         return BannerResource::collection(Banner::active()->get());
     }
 
+    public function indexAll(): AnonymousResourceCollection
+    {
+        return BannerResource::collection(Banner::orderBy('sort_order')->get());
+    }
+
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([

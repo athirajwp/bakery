@@ -15,7 +15,8 @@ class AdminUserSeeder extends Seeder
             [
                 'name' => 'Kavitha Sweets Admin',
                 'phone' => '918903749300',
-                'password' => Hash::make('kavitha@2024'),
+                'username' => 'admin',
+                'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'is_active' => true,
             ]

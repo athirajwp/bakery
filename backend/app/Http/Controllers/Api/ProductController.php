@@ -35,6 +35,17 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
+    public function indexAll(Request $request): AnonymousResourceCollection
+    {
+        $query = Product::with('category')
+            ->when($request->filled('q'), fn ($q) => $q->where('name', 'like', '%' . $request->input('q') . '%'))
+            ->when($request->filled('category'), fn ($q) => $q->where('category_id', $request->input('category')));
+
+        return ProductResource::collection(
+            $query->latest()->paginate($request->integer('per_page', 15))
+        );
+    }
+
     public function store(StoreProductRequest $request): ProductResource
     {
         $validated = $request->validated();

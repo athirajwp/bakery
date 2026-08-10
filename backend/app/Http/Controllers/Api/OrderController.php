@@ -15,7 +15,7 @@ class OrderController extends Controller
     public function index(Request $request): AnonymousResourceCollection
     {
         return OrderResource::collection(
-            Order::with('items')
+            Order::withCount('items')
                 ->when($request->filled('status'), fn ($q) => $q->where('status', $request->input('status')))
                 ->when($request->filled('q'), fn ($q) => $q->where(fn ($qq) => $qq
                     ->where('order_number', 'like', '%' . $request->input('q') . '%')

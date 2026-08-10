@@ -16,6 +16,7 @@ class CategoryResource extends JsonResource
             'description' => $this->description,
             'image' => $this->image ? asset('storage/' . $this->image) : null,
             'products_count' => $this->whenCounted('products'),
+            'is_active' => (bool) $this->is_active,
         ];
     }
 }

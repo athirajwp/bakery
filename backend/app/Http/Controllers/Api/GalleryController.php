@@ -19,6 +19,11 @@ class GalleryController extends Controller
         return GalleryResource::collection(GalleryImage::active()->get());
     }
 
+    public function indexAll(): AnonymousResourceCollection
+    {
+        return GalleryResource::collection(GalleryImage::orderBy('sort_order')->get());
+    }
+
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([

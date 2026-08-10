@@ -21,6 +21,11 @@ class CategoryController extends Controller
         );
     }
 
+    public function indexAll(): AnonymousResourceCollection
+    {
+        return CategoryResource::collection(Category::withCount('products')->get());
+    }
+
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([

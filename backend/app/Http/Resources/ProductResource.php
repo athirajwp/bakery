@@ -11,6 +11,7 @@ class ProductResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'category_id' => $this->category_id,
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
@@ -22,6 +23,7 @@ class ProductResource extends JsonResource
             'reviews_count' => $this->reviews_count,
             'tags' => $this->tags,
             'is_best_seller' => (bool) $this->is_best_seller,
+            'is_active' => (bool) $this->is_active,
             'category' => new CategoryResource($this->whenLoaded('category')),
         ];
     }

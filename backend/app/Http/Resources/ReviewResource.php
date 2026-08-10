@@ -15,6 +15,7 @@ class ReviewResource extends JsonResource
             'place' => $this->place,
             'rating' => $this->rating,
             'comment' => $this->comment,
+            'is_approved' => (bool) $this->is_approved,
             'created_at' => $this->created_at?->toIso8601String(),
         ];
     }

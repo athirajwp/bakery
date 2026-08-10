@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Cake, Menu, X, Phone, MessageCircle } from 'lucide-react'
+import { Cake, Menu, X, Phone, MessageCircle, ShoppingCart } from 'lucide-react'
 import { site, waLink } from '@/data/site'
+import { useCart } from '@/context/CartContext'
 
 const NAV = [
   { label: 'Home', to: '/' },
@@ -14,6 +15,24 @@ const NAV = [
 
 function isHashTarget(to) {
   return to.startsWith('/#')
+}
+
+function CartButton({ className = '' }) {
+  const { count, openCart } = useCart()
+  return (
+    <button
+      onClick={openCart}
+      className={`relative grid h-11 w-11 place-items-center rounded-full ${className}`}
+      aria-label={`Open cart, ${count} ${count === 1 ? 'item' : 'items'}`}
+    >
+      <ShoppingCart size={20} strokeWidth={1.9} />
+      {count > 0 && (
+        <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-gold-gradient px-1 text-[10px] font-bold text-brown shadow-gold">
+          {count}
+        </span>
+      )}
+    </button>
+  )
 }
 
 export default function Navbar() {
@@ -102,6 +121,7 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <CartButton className={solid ? 'bg-primary/10 text-primary' : 'bg-white/15 text-white backdrop-blur-sm'} />
           <a href={`tel:${site.phoneTel}`} className="btn-outline !px-4 !py-2" aria-label="Call the shop">
             <Phone size={16} />
             <span className="hidden xl:inline">Call Now</span>
@@ -112,16 +132,19 @@ export default function Navbar() {
           </a>
         </div>
 
-        <button
-          className={`grid h-11 w-11 place-items-center rounded-full lg:hidden ${
-            solid ? 'bg-primary text-cream' : 'bg-white/15 text-white backdrop-blur-sm'
-          }`}
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <CartButton className={solid ? 'bg-primary/10 text-primary' : 'bg-white/15 text-white backdrop-blur-sm'} />
+          <button
+            className={`grid h-11 w-11 place-items-center rounded-full ${
+              solid ? 'bg-primary text-cream' : 'bg-white/15 text-white backdrop-blur-sm'
+            }`}
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>

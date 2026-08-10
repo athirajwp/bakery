@@ -17,6 +17,11 @@ class SettingController extends Controller
         return response()->json(['settings' => $general]);
     }
 
+    public function all(): JsonResponse
+    {
+        return response()->json(['settings' => Setting::allGrouped()]);
+    }
+
     public function update(Request $request): JsonResponse
     {
         $validated = $request->validate([

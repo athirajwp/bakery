@@ -14,6 +14,8 @@ class GalleryResource extends JsonResource
             'title' => $this->title,
             'category' => $this->category,
             'image' => $this->image ? asset('storage/' . $this->image) : null,
+            'sort_order' => $this->sort_order,
+            'is_active' => (bool) $this->is_active,
         ];
     }
 }

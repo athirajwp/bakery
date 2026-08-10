@@ -15,6 +15,8 @@ class BannerResource extends JsonResource
             'subtitle' => $this->subtitle,
             'image' => $this->image ? asset('storage/' . $this->image) : null,
             'link' => $this->link,
+            'sort_order' => $this->sort_order,
+            'is_active' => (bool) $this->is_active,
         ];
     }
 }
