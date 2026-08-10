@@ -107,11 +107,18 @@ export async function apiFetch(path, { method = 'GET', body, token, formData } =
       const localOrders = getLocalOrders()
       const localProds = getLocalProducts()
       return {
-        total_orders: localOrders.length,
-        pending_orders: localOrders.filter((o) => o.status === 'pending').length,
-        total_revenue: localOrders.reduce((sum, o) => sum + (o.total || 0), 0),
-        total_products: localProds.length,
+        stats: {
+          products: localProds.length,
+          active_products: localProds.length,
+          orders: localOrders.length,
+          pending_orders: localOrders.filter((o) => o.status === 'pending').length,
+          revenue: localOrders.reduce((sum, o) => sum + (o.total || 0), 0),
+          reviews: 12,
+          approved_reviews: 12,
+          new_enquiries: 0,
+        },
         recent_orders: localOrders.slice(0, 5),
+        recent_enquiries: [],
         top_products: localProds.slice(0, 4),
       }
     }
@@ -148,9 +155,46 @@ export async function apiFetch(path, { method = 'GET', body, token, formData } =
       const localCats = getLocalCategories()
       return {
         data: localCats,
-        current_page: 1,
-        last_page: 1,
-        total: localCats.length,
+      }
+    }
+
+    // Gallery fallback
+    if (path.startsWith('/admin/gallery')) {
+      return { data: [] }
+    }
+
+    // Reviews fallback
+    if (path.startsWith('/admin/reviews')) {
+      return { data: [], current_page: 1, last_page: 1, total: 0 }
+    }
+
+    // Banners fallback
+    if (path.startsWith('/admin/banners')) {
+      return { data: [] }
+    }
+
+    // Enquiries fallback
+    if (path.startsWith('/admin/enquiries')) {
+      return { data: [], current_page: 1, last_page: 1, total: 0 }
+    }
+
+    // Settings fallback
+    if (path.startsWith('/admin/settings')) {
+      return {
+        settings: {
+          general: {
+            shop_name: 'Kavitha Sweets & Bakery',
+            phone: '8903749300',
+            address: '9 Park Road, Kuthalam, Mayiladuthurai',
+            working_hours: '7:00 AM - 10:00 PM',
+            rating: '4.8',
+            review_count: '150+',
+          },
+          seo: {
+            meta_title: 'Kavitha Sweets & Bakery',
+            meta_description: 'Fresh cakes, traditional Tamil sweets and snacks in Kuthalam.',
+          },
+        },
       }
     }
 
