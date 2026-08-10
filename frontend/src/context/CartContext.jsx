@@ -39,7 +39,6 @@ export default function CartProvider({ children }) {
         },
       ]
     })
-    setIsOpen(true)
   }
 
   const setQty = (id, qty) => {

@@ -1,4 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  (typeof window !== 'undefined' && window.location.port === '8000'
+    ? '/api'
+    : 'http://localhost:8000/api')
 
 export async function apiFetch(path, { method = 'GET', body, token, formData } = {}) {
   const headers = {}

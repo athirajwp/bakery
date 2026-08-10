@@ -27,6 +27,7 @@ Route::get('banners', [BannerController::class, 'index']);
 Route::get('reviews', [ReviewController::class, 'index']);
 Route::post('reviews', [ReviewController::class, 'store']);
 Route::post('enquiries', [EnquiryController::class, 'store']);
+Route::post('orders', [OrderController::class, 'store']);
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('me', [AuthController::class, 'me']);
     Route::get('my-orders', [OrderController::class, 'myOrders']);
-    Route::post('orders', [OrderController::class, 'store']);
 });
 
 /*

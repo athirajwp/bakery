@@ -11,9 +11,10 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(
-            ['email' => 'admin@kavithasweets.in'],
+            ['username' => 'admin'],
             [
                 'name' => 'Kavitha Sweets Admin',
+                'email' => 'admin@kavithasweets.in',
                 'phone' => '918903749300',
                 'username' => 'admin',
                 'password' => Hash::make('admin123'),

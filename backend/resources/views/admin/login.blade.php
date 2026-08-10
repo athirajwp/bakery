@@ -34,8 +34,8 @@
             <form method="POST" action="{{ route('admin.login') }}" class="mt-6 space-y-4">
                 @csrf
                 <div>
-                    <label class="text-xs font-semibold uppercase tracking-wider text-brown">Email</label>
-                    <input type="email" name="email" value="{{ old('email') }}" required autofocus
+                    <label class="text-xs font-semibold uppercase tracking-wider text-brown">Username or Email</label>
+                    <input type="text" name="email" value="{{ old('email') }}" required autofocus
                            class="mt-1.5 w-full rounded-xl border border-primary/15 bg-white px-4 py-3 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none">
                 </div>
                 <div>
@@ -53,7 +53,7 @@
             </form>
 
             <p class="mt-6 text-center text-xs text-brown">
-                Default credentials from seeder: <code class="rounded bg-white px-1.5 py-0.5">admin@kavithasweets.in / kavitha@2024</code>
+                Admin credentials: <code class="rounded bg-white px-1.5 py-0.5">admin / admin123</code>
             </p>
         </div>
     </div>

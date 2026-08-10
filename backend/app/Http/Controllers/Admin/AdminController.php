@@ -29,10 +29,17 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
+        $request->validate([
+            'email' => ['required'],
             'password' => ['required'],
         ]);
+
+        $loginField = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        $credentials = [
+            $loginField => $request->input('email'),
+            'password' => $request->input('password'),
+        ];
 
         if (!Auth::attempt($credentials, $request->boolean('remember'))) {
             return back()->withErrors(['email' => 'Invalid credentials.'])->onlyInput('email');

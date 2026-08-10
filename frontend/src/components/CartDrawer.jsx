@@ -40,7 +40,7 @@ export default function CartDrawer({ onCheckout }) {
             role="dialog"
             aria-modal="true"
             aria-label="Shopping cart"
-            className="fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-cream shadow-2xl"
+            className="fixed right-0 top-0 z-[70] flex h-full w-[85vw] sm:w-full max-w-md flex-col rounded-l-3xl bg-cream shadow-2xl border-l border-primary/10"
           >
             <header className="flex items-center justify-between border-b border-primary/10 px-6 py-4">
               <h2 className="flex items-center gap-2 font-heading text-xl font-bold text-brown">

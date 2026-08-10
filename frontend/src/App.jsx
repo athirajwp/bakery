@@ -35,11 +35,13 @@ const TITLES = {
   '/contact': 'Contact | Kavitha Sweets & Bakery',
 }
 
+import FloatingCartBar from '@/components/FloatingCartBar'
+
 function PublicLayout() {
   const [checkoutOpen, setCheckoutOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream pb-20">
       <ScrollManager />
       <a
         href="#main"
@@ -53,6 +55,11 @@ function PublicLayout() {
       </main>
       <Footer />
       <FloatingButtons />
+      <FloatingCartBar
+        onCheckout={() => {
+          setCheckoutOpen(true)
+        }}
+      />
       <CartDrawer
         onCheckout={() => {
           setCheckoutOpen(true)

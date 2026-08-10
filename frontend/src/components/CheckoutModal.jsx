@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { CheckCircle2, Loader2, Lock, ShoppingBag, UserPlus, X } from 'lucide-react'
+import { CheckCircle2, Loader2, Lock, Printer, ShoppingBag, UserPlus, X } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { useCart } from '@/context/CartContext'
 import { apiFetch } from '@/lib/api'
@@ -38,7 +38,7 @@ function ErrorBanner({ message }) {
 const TITLES = {
   auth: 'Account',
   form: 'Checkout',
-  success: 'Order Placed',
+  success: 'Order Bill / Receipt',
 }
 
 export default function CheckoutModal({ open, onClose }) {
@@ -51,11 +51,13 @@ export default function CheckoutModal({ open, onClose }) {
   const [form, setForm] = useState(EMPTY_FORM)
   const [placed, setPlaced] = useState(false)
   const [orderNumber, setOrderNumber] = useState('')
+  const [placedOrder, setPlacedOrder] = useState(null)
+  const [orderedItems, setOrderedItems] = useState([])
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [fieldErrors, setFieldErrors] = useState({})
 
-  const step = placed ? 'success' : status === 'authed' ? 'form' : 'auth'
+  const step = placed ? 'success' : 'form'
 
   useEffect(() => {
     if (!open) return
@@ -141,6 +143,7 @@ export default function CheckoutModal({ open, onClose }) {
     e.preventDefault()
     setSubmitting(true)
     try {
+      const currentItems = [...items]
       const data = await apiFetch('/orders', {
         method: 'POST',
         token,
@@ -152,7 +155,7 @@ export default function CheckoutModal({ open, onClose }) {
           city: form.city.trim() || undefined,
           payment_method: form.paymentMethod,
           notes: form.notes.trim() || undefined,
-          items: items.map((i) => ({
+          items: currentItems.map((i) => ({
             product_id: i.id,
             name: i.name,
             quantity: i.qty,
@@ -160,6 +163,8 @@ export default function CheckoutModal({ open, onClose }) {
           })),
         },
       })
+      setOrderedItems(currentItems)
+      setPlacedOrder(data.order)
       setOrderNumber(data.order.order_number)
       setPlaced(true)
       clear()
@@ -215,18 +220,109 @@ export default function CheckoutModal({ open, onClose }) {
                     <Loader2 size={32} className="animate-spin text-primary" />
                   </div>
                 ) : step === 'success' ? (
-                  <div className="flex flex-col items-center gap-4 py-6 text-center">
-                    <span className="grid h-20 w-20 place-items-center rounded-full bg-green-100 text-green-600">
-                      <CheckCircle2 size={40} />
-                    </span>
-                    <h3 className="font-heading text-2xl font-bold text-brown">Thank you for your order!</h3>
-                    <p className="max-w-sm text-sm text-brown-muted">
-                      Your order <span className="font-bold text-primary">{orderNumber}</span> has been received. We
-                      will call you shortly to confirm the delivery details.
-                    </p>
-                    <button onClick={onClose} className="btn-gold mt-2 !px-8 !py-4">
-                      Continue Shopping
-                    </button>
+                  <div className="py-2 text-left space-y-4">
+                    <div className="flex flex-col items-center text-center">
+                      <span className="grid h-12 w-12 place-items-center rounded-full bg-green-100 text-green-600 mb-2">
+                        <CheckCircle2 size={28} />
+                      </span>
+                      <h3 className="font-heading text-2xl font-bold text-brown">Order Placed Successfully!</h3>
+                      <p className="text-xs text-brown-muted mt-0.5">Thank you for ordering with Kavitha Sweets &amp; Bakery</p>
+                    </div>
+
+                    {/* Customer Bill / Receipt */}
+                    <div className="rounded-2xl border border-brown/15 bg-white p-4 shadow-sm text-brown text-xs">
+                      <div className="border-b border-dashed border-brown/20 pb-3 text-center">
+                        <h4 className="font-heading text-base font-bold text-primary">Kavitha Sweets &amp; Bakery</h4>
+                        <p className="text-[10px] font-medium text-brown-muted">கவிதா இனிப்புகள் மற்றும் அடுமனை</p>
+                        <p className="text-[10px] text-brown-muted mt-0.5">9 Park Road, Kuthalam, Mayiladuthurai · Ph: +91 89037 49300</p>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2 border-b border-dashed border-brown/20 py-2.5 text-[11px]">
+                        <div>
+                          <span className="text-brown-muted block text-[10px]">Bill No:</span>
+                          <strong className="text-primary font-bold">{orderNumber}</strong>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-brown-muted block text-[10px]">Date &amp; Time:</span>
+                          <strong>{new Date().toLocaleString('en-IN', { dateStyle: 'short', timeStyle: 'short' })}</strong>
+                        </div>
+                        <div>
+                          <span className="text-brown-muted block text-[10px]">Customer:</span>
+                          <strong className="capitalize">{placedOrder?.customer_name || form.name}</strong>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-brown-muted block text-[10px]">Mobile:</span>
+                          <strong>{placedOrder?.phone || form.phone}</strong>
+                        </div>
+                        {(placedOrder?.address || form.address) && (
+                          <div className="col-span-2">
+                            <span className="text-brown-muted block text-[10px]">Delivery Address:</span>
+                            <span>{placedOrder?.address || form.address}{form.city ? `, ${form.city}` : ''}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="py-2.5">
+                        <table className="w-full text-[11px]">
+                          <thead>
+                            <tr className="border-b border-brown/10 text-brown-muted text-left">
+                              <th className="pb-1 font-semibold">Item</th>
+                              <th className="pb-1 text-center font-semibold">Qty</th>
+                              <th className="pb-1 text-right font-semibold">Rate</th>
+                              <th className="pb-1 text-right font-semibold">Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-brown/5">
+                            {(placedOrder?.items || orderedItems).map((i, idx) => (
+                              <tr key={idx} className="text-brown">
+                                <td className="py-1.5 font-medium">{i.product_name || i.name}</td>
+                                <td className="py-1.5 text-center">{i.quantity || i.qty}</td>
+                                <td className="py-1.5 text-right">₹{i.price}</td>
+                                <td className="py-1.5 text-right font-semibold">₹{(i.price * (i.quantity || i.qty))}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div className="border-t border-dashed border-brown/20 pt-2.5 space-y-1 text-[11px]">
+                        <div className="flex justify-between text-brown-muted">
+                          <span>Subtotal</span>
+                          <span>₹{placedOrder?.items_total || subtotal}</span>
+                        </div>
+                        <div className="flex justify-between text-brown-muted">
+                          <span>Delivery Charge</span>
+                          <span>{placedOrder?.delivery_charge > 0 ? `₹${placedOrder.delivery_charge}` : 'FREE'}</span>
+                        </div>
+                        <div className="flex justify-between border-t border-brown/10 pt-1.5 text-sm font-bold text-primary">
+                          <span>Total Amount</span>
+                          <span>₹{placedOrder?.total || subtotal}</span>
+                        </div>
+                        <div className="flex justify-between text-[10px] text-brown-muted pt-1">
+                          <span>Payment Method:</span>
+                          <span className="uppercase font-semibold text-green-700">Cash on Delivery</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-3 pt-2 border-t border-brown/10 text-center text-[10px] text-brown-muted italic">
+                        Thank you for visiting Kavitha Sweets &amp; Bakery!
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row items-center gap-2.5">
+                      <button
+                        onClick={() => window.print()}
+                        className="btn-gold w-full flex items-center justify-center gap-2 !py-3 text-xs"
+                      >
+                        <Printer size={15} /> Print / Save Bill
+                      </button>
+                      <button
+                        onClick={onClose}
+                        className="w-full rounded-full border border-primary/20 bg-white py-3 text-xs font-semibold text-primary transition hover:bg-primary/5"
+                      >
+                        Continue Shopping
+                      </button>
+                    </div>
                   </div>
                 ) : step === 'auth' ? (
                   <div>

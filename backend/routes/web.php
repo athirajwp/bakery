@@ -3,7 +3,13 @@
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => redirect('/admin'));
+Route::get('/', function () {
+    if (file_exists(public_path('index.html'))) {
+        return response()->file(public_path('index.html'));
+    }
+    return redirect('http://localhost:5173');
+});
+Route::get('/login', fn () => redirect()->route('admin.login'))->name('login');
 
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', [AdminController::class, 'showLogin'])->name('admin.login');
@@ -49,4 +55,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings.edit');
     Route::post('/settings', [AdminController::class, 'settingsUpdate'])->name('settings.update');
+});
+
+Route::fallback(function () {
+    if (file_exists(public_path('index.html'))) {
+        return response()->file(public_path('index.html'));
+    }
+    return redirect('http://localhost:5173');
 });
